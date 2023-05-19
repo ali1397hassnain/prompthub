@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 const Nav = () => {
+  const { data: session } = useSession();
+
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
@@ -18,7 +20,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className="flex-between w-full mb-16 pt-3">
+    <nav className="flex-between w-full mb-10 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
         <Image
           src="/assets/images/prompthub-logo1.png"
@@ -32,10 +34,10 @@ const Nav = () => {
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
-        {true ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
-              Create Post
+              Create Prompt
             </Link>
 
             <button type="button" onClick={signOut} className="outline_btn">
@@ -44,7 +46,7 @@ const Nav = () => {
 
             <Link href="/profile">
               <Image
-                src={"/assets/images/prompthub-logo1.png"}
+                src={session?.user.image}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -54,7 +56,7 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            {/* {providers && 
+            {providers && 
             Object.values(providers).map((provider) => (
               <button
                 type="button"
@@ -64,13 +66,13 @@ const Nav = () => {
               >
                 Sign In
               </button>
-            ))} */}
+            ))}
           </>
         )}
       </div>
 
       {/* Mobile Navigation */}
-      {/* <div className="sm:hidden flex relative">
+      <div className="sm:hidden flex relative">
       {session?.user ? (
         <div className="flex">
           <Image 
@@ -126,7 +128,7 @@ const Nav = () => {
             ))}
         </>
       )}
-    </div> */}
+    </div>
     </nav>
   );
 };
