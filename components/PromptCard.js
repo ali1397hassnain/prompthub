@@ -21,8 +21,8 @@ const PromptCard = ({ prompt, handleEdit, handleDelete, handleTagClick }) => {
   };
 
   const handleCopy = () => {
-    setCopied(prompt.prompt);
-    navigator.clipboard.writeText(prompt.prompt);
+    setCopied(prompt?.prompt);
+    navigator.clipboard.writeText(prompt?.prompt);
     setTimeout(() => setCopied(false), 3000);
   };
 
@@ -54,23 +54,23 @@ const PromptCard = ({ prompt, handleEdit, handleDelete, handleTagClick }) => {
         <div className='copy_btn' onClick={handleCopy}>
           <Image
             src={
-              copied === prompt.prompt
+              copied === prompt?.prompt
                 ? "/assets/icons/tick.svg"
                 : "/assets/icons/copy.svg"
             }
-            alt={copied === prompt.prompt ? "tick_icon" : "copy_icon"}
+            alt={copied === prompt?.prompt ? "tick_icon" : "copy_icon"}
             width={12}
             height={12}
           />
         </div>
       </div>
 
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{prompt.prompt}</p>
+      <p className='my-4 font-satoshi text-sm text-gray-700'>{prompt?.prompt}</p>
       <p
         className='font-inter text-sm blue_gradient cursor-pointer'
-        onClick={() => handleTagClick && handleTagClick(prompt.tag)}
+        onClick={() => handleTagClick && handleTagClick(prompt?.tag)}
       >
-        #{prompt.tag}
+        #{prompt?.tag}
       </p>
 
       {session?.user.id === prompt?.creator?._id && pathName === "/profile" && (

@@ -20,7 +20,7 @@ const Form = ({ type, prompt, setPrompt, submitting, handleSubmit }) => {
             </span>
   
             <textarea 
-              value={prompt.prompt}
+              value={prompt?.prompt}
               onChange={(e) => setPrompt({ ...prompt, prompt: e.target.value })}
               placeholder="Write your prompt here..."
               required
@@ -34,7 +34,7 @@ const Form = ({ type, prompt, setPrompt, submitting, handleSubmit }) => {
             </span>
   
             <input 
-              value={prompt.tag}
+              value={prompt?.tag}
               onChange={(e) => setPrompt({ ...prompt, tag: e.target.value })}
               placeholder="#tag"
               required
